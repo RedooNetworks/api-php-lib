@@ -20,6 +20,22 @@ class GeneralInfo extends \PleskX\Api\Struct
     /** @var string */
     public $description;
 
+    /** @var integer */
+    public $webspaceId ;
+
+    /** @var string */
+    public $webspaceGuid;
+
+    /** @var string */
+    public $dnsIpAddress;
+
+    /** @var string */
+    public $crDate;
+
+    /** @var integer */
+    public $realSize;
+
+
     public function __construct($apiResponse)
     {
         $this->_initScalarProperties($apiResponse, [
@@ -28,6 +44,11 @@ class GeneralInfo extends \PleskX\Api\Struct
             'status',
             'guid',
             'description',
+            'webspace-id',
+            'dns_ip_address',
+            'cr_date',
+            'real_size',
+            'webspace-guid',
         ]);
     }
 }
