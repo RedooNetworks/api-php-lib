@@ -1,14 +1,15 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH.
+// Copyright 1999-2020. Plesk International GmbH.
 
 namespace PleskX\Api\Operator;
+
 use PleskX\Api\Struct\Certificate as Struct;
 
 class Certificate extends \PleskX\Api\Operator
 {
-
     /**
      * @param array $properties
+     *
      * @return Struct\Info
      */
     public function generate($properties)
@@ -21,7 +22,7 @@ class Certificate extends \PleskX\Api\Operator
         }
 
         $response = $this->_client->request($packet);
+
         return new Struct\Info($response);
     }
-
 }

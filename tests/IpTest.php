@@ -1,5 +1,6 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH.
+// Copyright 1999-2020. Plesk International GmbH.
+
 namespace PleskXTest;
 
 class IpTest extends TestCase
@@ -10,6 +11,6 @@ class IpTest extends TestCase
         $this->assertGreaterThan(0, count($ips));
 
         $ip = reset($ips);
-        $this->assertRegExp('/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/', $ip->ipAddress);
+        $this->assertMatchesRegularExpression('/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/', $ip->ipAddress);
     }
 }

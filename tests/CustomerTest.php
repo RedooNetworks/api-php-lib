@@ -1,5 +1,6 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH.
+// Copyright 1999-2020. Plesk International GmbH.
+
 namespace PleskXTest;
 
 use PleskXTest\Utility\KeyLimitChecker;
@@ -9,7 +10,7 @@ class CustomerTest extends TestCase
 {
     private $_customerProperties;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_customerProperties = [
             'cname' => 'Plesk',
@@ -25,7 +26,7 @@ class CustomerTest extends TestCase
     public function testCreate()
     {
         $customer = static::$_client->customer()->create($this->_customerProperties);
-        $this->assertInternalType('integer', $customer->id);
+        $this->assertIsInt($customer->id);
         $this->assertGreaterThan(0, $customer->id);
 
         static::$_client->customer()->delete('id', $customer->id);

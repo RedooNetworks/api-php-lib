@@ -1,5 +1,6 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH.
+// Copyright 1999-2020. Plesk International GmbH.
+
 namespace PleskXTest;
 
 use PleskX\Api\Exception;
@@ -9,7 +10,7 @@ class SecretKeyTest extends TestCase
     public function testCreate()
     {
         $keyId = static::$_client->secretKey()->create('192.168.0.1');
-        $this->assertRegExp('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/', $keyId);
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/', $keyId);
         static::$_client->secretKey()->delete($keyId);
     }
 
@@ -34,7 +35,9 @@ class SecretKeyTest extends TestCase
         $keys = static::$_client->secretKey()->getAll();
         $this->assertGreaterThanOrEqual(2, count($keys));
 
-        $keyIpAddresses = array_map(function($key) { return $key->ipAddress; }, $keys);
+        $keyIpAddresses = array_map(function ($key) {
+            return $key->ipAddress;
+        }, $keys);
         $this->assertContains('192.168.0.1', $keyIpAddresses);
         $this->assertContains('192.168.0.2', $keyIpAddresses);
 

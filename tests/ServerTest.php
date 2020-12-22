@@ -1,5 +1,6 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH.
+// Copyright 1999-2020. Plesk International GmbH.
+
 namespace PleskXTest;
 
 class ServerTest extends TestCase
@@ -15,7 +16,7 @@ class ServerTest extends TestCase
     {
         $generalInfo = static::$_client->server()->getGeneralInfo();
         $this->assertGreaterThan(0, strlen($generalInfo->serverName));
-        $this->assertRegExp('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/', strtolower($generalInfo->serverGuid));
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/', strtolower($generalInfo->serverGuid));
         $this->assertEquals('standard', $generalInfo->mode);
     }
 
@@ -31,7 +32,7 @@ class ServerTest extends TestCase
     {
         $admin = static::$_client->server()->getAdmin();
         $this->assertGreaterThan(0, strlen($admin->name));
-        $this->assertContains('@', $admin->email);
+        $this->assertStringContainsString('@', $admin->email);
     }
 
     public function testGetKeyInfo()

@@ -1,5 +1,6 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH.
+// Copyright 1999-2020. Plesk International GmbH.
+
 namespace PleskXTest;
 
 use PleskXTest\Utility\KeyLimitChecker;
@@ -9,13 +10,13 @@ class SiteTest extends TestCase
     /** @var \PleskX\Api\Struct\Webspace\Info */
     private static $webspace;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         static::$webspace = static::_createWebspace();
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -32,6 +33,7 @@ class SiteTest extends TestCase
             'name' => $name,
             'webspace-id' => static::$webspace->id,
         ], $properties);
+
         return static::$_client->site()->create($properties);
     }
 

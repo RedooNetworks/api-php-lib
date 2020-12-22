@@ -1,5 +1,6 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH.
+// Copyright 1999-2020. Plesk International GmbH.
+
 namespace PleskXTest;
 
 class DatabaseServerTest extends TestCase
@@ -21,7 +22,7 @@ class DatabaseServerTest extends TestCase
     public function testGetAll()
     {
         $dbServers = static::$_client->databaseServer()->getAll();
-        $this->assertInternalType('array', $dbServers);
+        $this->assertIsArray($dbServers);
         $this->assertGreaterThan(0, count($dbServers));
         $this->assertEquals('localhost', $dbServers[0]->host);
     }

@@ -1,5 +1,6 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH.
+// Copyright 1999-2020. Plesk International GmbH.
+
 namespace PleskXTest;
 
 use PleskXTest\Utility\PasswordProvider;
@@ -9,7 +10,7 @@ class DatabaseTest extends TestCase
     /** @var \PleskX\Api\Struct\Webspace\Info */
     private static $webspace;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         static::$webspace = static::_createWebspace();
@@ -208,6 +209,7 @@ class DatabaseTest extends TestCase
 
     /**
      * @param array $params
+     *
      * @return \PleskX\Api\Struct\Database\Info
      */
     private function _createDatabase(array $params)
@@ -221,6 +223,7 @@ class DatabaseTest extends TestCase
 
     /**
      * @param array $params
+     *
      * @return \PleskX\Api\Struct\Database\UserInfo
      */
     private function _createUser(array $params)

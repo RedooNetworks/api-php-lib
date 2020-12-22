@@ -1,5 +1,6 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH.
+// Copyright 1999-2020. Plesk International GmbH.
+
 namespace PleskXTest;
 
 use PleskXTest\Utility\PasswordProvider;
@@ -47,6 +48,17 @@ class WebspaceTest extends TestCase
         $info = static::$_client->webspace()->getPhpSettings('id', $webspace->id);
 
         $this->assertArrayHasKey('open_basedir', $info->properties);
+
+        static::$_client->webspace()->delete('id', $webspace->id);
+    }
+
+    public function testGetLimits()
+    {
+        $webspace = static::_createWebspace();
+        $limits = static::$_client->webspace()->getLimits('id', $webspace->id);
+
+        $this->assertIsArray($limits->limits);
+        $this->assertNotEmpty($limits->limits);
 
         static::$_client->webspace()->delete('id', $webspace->id);
     }

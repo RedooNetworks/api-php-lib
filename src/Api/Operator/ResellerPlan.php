@@ -1,9 +1,8 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH.
+// Copyright 1999-2020. Plesk International GmbH.
 
 namespace PleskX\Api\Operator;
 
 class ResellerPlan extends \PleskX\Api\Operator
 {
-
 }
