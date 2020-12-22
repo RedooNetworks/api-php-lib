@@ -2,7 +2,7 @@
 // Copyright 1999-2020. Plesk International GmbH.
 
 namespace PleskX\Api\Operator;
-
+use PleskX\Api\Client;
 use PleskX\Api\Struct\Site as Struct;
 
 class Site extends \PleskX\Api\Operator
@@ -11,7 +11,6 @@ class Site extends \PleskX\Api\Operator
 
     /**
      * @param array $properties
-     *
      * @return Struct\Info
      */
     public function create(array $properties)
@@ -38,14 +37,12 @@ class Site extends \PleskX\Api\Operator
         }
 
         $response = $this->_client->request($packet);
-
         return new Struct\Info($response);
     }
 
     /**
      * @param string $field
      * @param int|string $value
-     *
      * @return bool
      */
     public function delete($field, $value)
@@ -56,20 +53,17 @@ class Site extends \PleskX\Api\Operator
     /**
      * @param string $field
      * @param int|string $value
-     *
      * @return Struct\GeneralInfo
      */
     public function get($field, $value)
     {
         $items = $this->_getItems(Struct\GeneralInfo::class, 'gen_info', $field, $value);
-
         return reset($items);
     }
 
     /**
      * @param string $field
      * @param int|string $value
-     *
      * @return Struct\HostingInfo|null
      */
     public function getHosting($field, $value)
@@ -77,8 +71,30 @@ class Site extends \PleskX\Api\Operator
         $items = $this->_getItems(Struct\HostingInfo::class, 'hosting', $field, $value, function ($node) {
             return isset($node->vrt_hst);
         });
-
         return empty($items) ? null : reset($items);
+    }
+
+    /**
+     * @param string $field
+     * @param int|string $value
+     * @return Struct\TrafficInfo|null
+     */
+    public function getTraffic($field, $value, $fromDate, $toDate)
+    {
+        $items = $this->request('<get_traffic>
+<filter><'.$field.'>'.$value.'</'.$field.'></filter>
+<since_date>'.date('Y-m-d', strtotime($fromDate)).'</since_date>
+<to_date>'.date('Y-m-d', strtotime($toDate)).'</to_date>
+</get_traffic>', Client::RESPONSE_SHORT);
+
+        $result = array();
+        foreach($items->traffic as $traffic) {
+            $date = (string)$traffic->date;
+            unset($traffic->date);
+            $result[$date] = json_decode(json_encode($traffic));
+        }
+
+        return $result;
     }
 
     /**
@@ -88,4 +104,5 @@ class Site extends \PleskX\Api\Operator
     {
         return $this->_getItems(Struct\GeneralInfo::class, 'gen_info');
     }
+
 }
