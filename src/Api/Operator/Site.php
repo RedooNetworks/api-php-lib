@@ -71,6 +71,7 @@ class Site extends \PleskX\Api\Operator
         $items = $this->_getItems(Struct\HostingInfo::class, 'hosting', $field, $value, function ($node) {
             return isset($node->vrt_hst);
         });
+
         return empty($items) ? null : reset($items);
     }
 

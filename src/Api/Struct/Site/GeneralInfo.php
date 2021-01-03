@@ -20,7 +20,7 @@ class GeneralInfo extends \PleskX\Api\Struct
     /** @var string */
     public $description;
 
-    /** @var integer */
+    /** @var int */
     public $webspaceId ;
 
     /** @var string */
@@ -32,7 +32,7 @@ class GeneralInfo extends \PleskX\Api\Struct
     /** @var string */
     public $crDate;
 
-    /** @var integer */
+    /** @var int */
     public $realSize;
 
 

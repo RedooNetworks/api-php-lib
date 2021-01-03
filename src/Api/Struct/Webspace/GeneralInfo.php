@@ -19,7 +19,7 @@ class GeneralInfo extends \PleskX\Api\Struct
         $this->_initScalarProperties($apiResponse, [
             'name',
             'guid',
-            'real_size',
+            'real_size'
         ]);
     }
 }

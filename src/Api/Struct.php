@@ -37,6 +37,8 @@ abstract class Struct
                 $value = (string) $value;
             } elseif ('int' == $propertyType) {
                 $value = (int) $value;
+            } elseif ('array' == $propertyType) {
+
             } elseif ('bool' == $propertyType) {
                 $value = in_array((string) $value, ['true', 'on', 'enabled']);
             } else {
